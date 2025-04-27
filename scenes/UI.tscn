@@ -1,4 +1,24 @@
-Placeholder
-scene
-for
-UI
+[gd_scene format=2]
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="Instructions" type="Label" parent="."]
+anchor_right = 1.0
+margin_left = 20
+margin_top = 20
+margin_right = -20
+margin_bottom = 80
+text = "Use arrow keys to move, Space to jump
+The shadow follows you and adapts to your playstyle"
+align = 1
+
+[node name="MoodDisplay" type="Label" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20
+margin_top = -80
+margin_right = -20
+margin_bottom = -20
+text = "Shadow Mood: Mischievous"
+align = 1
