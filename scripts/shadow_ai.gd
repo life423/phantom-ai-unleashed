@@ -26,14 +26,20 @@ var observation_interval = 0.5  # seconds between observations
 func _ready():
 	print("Shadow AI initialized")
 	
-	# Initialize the AI modules
-	dynamic_behavior = load("res://scripts/ai/dynamic_behavior.gd").new()
+	# Initialize the AI modules - create proper instances
+	var DynamicBehaviorClass = load("res://scripts/ai/dynamic_behavior.gd")
+	dynamic_behavior = DynamicBehaviorClass.new()
+	dynamic_behavior.name = "DynamicBehavior"
 	add_child(dynamic_behavior)
 	
-	personality = load("res://scripts/ai/personality.gd").new()
+	var PersonalityClass = load("res://scripts/ai/personality.gd")
+	personality = PersonalityClass.new()
+	personality.name = "Personality"
 	add_child(personality)
 	
-	evolution = load("res://scripts/ai/evolution.gd").new()
+	var EvolutionClass = load("res://scripts/ai/evolution.gd")
+	evolution = EvolutionClass.new()
+	evolution.name = "Evolution"
 	add_child(evolution)
 	
 	# Apply initial mood color to shadow sprite

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Game Images</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { margin-bottom: 20px; }
+        canvas { border: 1px solid #ccc; margin: 10px 0; }
+        button { padding: 10px; margin: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Game Image Generator</h1>
+    
+    <div class="container">
+        <h2>Player Sprite (Green Rectangle)</h2>
+        <canvas id="playerCanvas" width="32" height="32"></canvas>
+        <div>
+            <button onclick="downloadImage('playerCanvas', 'player_sprite.png')">Download Player Sprite</button>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h2>Shadow Effect (Dark Gray Rectangle)</h2>
+        <canvas id="shadowCanvas" width="32" height="32"></canvas>
+        <div>
+            <button onclick="downloadImage('shadowCanvas', 'shadow_effect.png')">Download Shadow Effect</button>
+        </div>
+    </div>
+
+    <script>
+        // Draw the player sprite (green rectangle)
+        function drawPlayerSprite() {
+            const canvas = document.getElementById('playerCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw green rectangle
+            ctx.fillStyle = '#4CAF50';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+        
+        // Draw the shadow sprite (dark gray semi-transparent rectangle)
+        function drawShadowSprite() {
+            const canvas = document.getElementById('shadowCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw shadow rectangle
+            ctx.fillStyle = 'rgba(50, 50, 50, 0.7)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+        
+        // Download the canvas as a PNG image
+        function downloadImage(canvasId, filename) {
+            const canvas = document.getElementById(canvasId);
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL("image/png");
+            link.click();
+        }
+        
+        // Initialize on page load
+        window.onload = function() {
+            drawPlayerSprite();
+            drawShadowSprite();
+        };
+    </script>
+</body>
+</html>

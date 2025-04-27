@@ -14,14 +14,25 @@ func _ready():
 		player.position = Vector2(400, 400)
 		print("Player initialized at ", player.position)
 	
+	# Make sure the shadow has fully initialized
+	await get_tree().process_frame
+	await get_tree().process_frame
+	
 	# Connect to shadow AI properties to update UI
 	if player and player.has_node("Shadow"):
 		var shadow = player.get_node("Shadow")
-		if shadow and shadow.get("personality") and ui and ui.has_node("MoodDisplay"):
-			var mood_display = ui.get_node("MoodDisplay")
-			if mood_display:
-				# Update UI with shadow mood information
-				_update_mood_display(shadow)
+		print("Shadow node found: ", shadow)
+		
+		# Wait a moment for shadow personality to be created
+		await get_tree().create_timer(0.5).timeout
+		
+		if shadow:
+			print("Checking shadow personality: ", shadow.get("personality"))
+			if ui and ui.has_node("MoodDisplay"):
+				var mood_display = ui.get_node("MoodDisplay")
+				if mood_display:
+					# Update UI with shadow mood information
+					_update_mood_display(shadow)
 	
 	# Debug info
 	print("Running Godot version: ", Engine.get_version_info().string)
@@ -42,8 +53,13 @@ func _update_mood_display(shadow):
 	# Update the UI to show the current shadow mood
 	if ui and ui.has_node("MoodDisplay"):
 		var mood_display = ui.get_node("MoodDisplay")
-		if shadow.get("personality"):
+		if shadow and shadow.get("personality"):
+			print("Updating mood display with shadow personality")
 			var mood_name = "Unknown"
-			if shadow.personality.has_method("get_mood_name"):
+			if shadow.personality and shadow.personality.has_method("get_mood_name"):
 				mood_name = shadow.personality.get_mood_name()
+				print("Shadow mood is: ", mood_name)
 			mood_display.text = "Shadow Mood: " + mood_name
+		else:
+			print("Shadow personality not found")
+			mood_display.text = "Shadow Mood: Initializing..."
