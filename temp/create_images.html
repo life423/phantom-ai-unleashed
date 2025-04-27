@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Game Images</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
@@ -14,7 +16,7 @@
     
     <div class="container">
         <h2>Player Sprite (Green Rectangle)</h2>
-        <canvas id="playerCanvas" width="32" height="32"></canvas>
+            <button type="button" onclick="downloadImage('playerCanvas', 'player_sprite.png')">Download Player Sprite</button>
         <div>
             <button onclick="downloadImage('playerCanvas', 'player_sprite.png')">Download Player Sprite</button>
         </div>
@@ -22,7 +24,7 @@
     
     <div class="container">
         <h2>Shadow Effect (Dark Gray Rectangle)</h2>
-        <canvas id="shadowCanvas" width="32" height="32"></canvas>
+            <button type="button" onclick="downloadImage('shadowCanvas', 'shadow_effect.png')">Download Shadow Effect</button>
         <div>
             <button onclick="downloadImage('shadowCanvas', 'shadow_effect.png')">Download Shadow Effect</button>
         </div>

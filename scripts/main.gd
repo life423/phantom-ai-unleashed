@@ -14,6 +14,19 @@ func _ready():
 		player.position = Vector2(400, 400)
 		print("Player initialized at ", player.position)
 	
+	# Make sure ShadowAI is added to the scene
+	if not has_node("ShadowAI"):
+		var shadow = load("res://scenes/ShadowAI.tscn").instantiate()
+		add_child(shadow)
+		shadow.global_position = $Player.global_position
+	
+	# Instantiate the ShadowAI
+	var shadow = preload("res://scenes/ShadowAI.tscn").instantiate()
+	add_child(shadow)
+	
+	# Position shadow near the player (you can adjust this in shadow_ai.gd later)
+	shadow.global_position = $Player.global_position + Vector2(30, 0)
+	
 	# Make sure the shadow has fully initialized
 	await get_tree().process_frame
 	await get_tree().process_frame

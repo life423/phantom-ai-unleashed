@@ -45,6 +45,16 @@ func _ready():
 	# Apply initial mood color to shadow sprite
 	if has_node("Sprite"):
 		$Sprite.modulate = personality.get_mood_color()
+		
+		# Check if sprite exists and is visible
+		var sprite = $Sprite
+		if sprite:
+			print("Shadow sprite exists")
+			print("Texture assigned: ", sprite.texture != null)
+			print("Modulate: ", sprite.modulate)
+			print("Visible: ", sprite.visible)
+		else:
+			print("Shadow sprite node not found!")
 
 func _process(delta):
 	if not active:
